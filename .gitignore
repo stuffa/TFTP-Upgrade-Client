@@ -18,5 +18,5 @@
 *.app
 
 # Directories
-/win32/*
-/linux/*
+win32/*
+linux/*
