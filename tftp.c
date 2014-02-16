@@ -395,6 +395,50 @@ int tftp_send(struct sockaddr_in *destination, int file)
     return 0;
 };
 
+void set_arp_entry(unsigned int mac[6], uint32_t ip_addr)
+{
+	return;
+
+//	struct arpreq ar;
+//	struct hostent *hp;
+//	struct sockaddr_in *sin;
+//	u_char *ea;
+//	int s;
+//
+//	bzero((caddr_t)&ar, sizeof ar);
+//	sin = (struct sockaddr_in *)&ar.arp_pa;
+//	sin->sin_family = AF_INET;
+//
+//	sin->sin_addr.s_addr = ip_addr;
+//
+//	ea = (u_char *)ar.arp_ha.sa_data;
+//
+//	if (ether_aton(mac, ea))
+//		return (1);
+//
+//	ar.arp_flags = ATF_PERM;
+//
+//	s = socket(AF_INET, SOCK_DGRAM, 0);
+//	if (s < 0)
+//	{
+//		perror("arp: socket");
+//		exit(-1);
+//	}
+//	if (ioctl(s, SIOCSARP, (caddr_t)&ar) < 0)
+//	{
+//		perror(host);
+//		exit(-1);
+//	}
+//	close(s);
+//	return (0);
+}
+
+void remove_arp_entry(unsigned int mac[8])
+{
+	return;
+}
+
+
 void version(void)
 {
 	fprintf(stderr, "\nTFTP Upgrade Client Version %s\n", VERSION);
@@ -412,6 +456,8 @@ void usage(void)
 					"-h             : display this message\n"
 					"-v             : display the version\n"
 					"-p port_number : use a different port.  Default = UDP port 69\n"
+					"-a <mac_addr>  : specify the mac address to get a faster connection\n"
+					"                 (not implemented yet)\n"
 					"\n"
 					"All transfers are binary.\n"
 					"Retry 2 times every second.\n"
@@ -508,6 +554,10 @@ int main(int argc, char **argv)
 		destination_address.sin_family=AF_INET;
 		destination_address.sin_port=htons(tftp_port);
 		memcpy(&destination_address.sin_addr.s_addr, hp->h_addr, hp->h_length);
+
+		// set the MAC address in the ARP table if we need to
+		if (set_arp)
+			set_arp_entry(mac, destination_address.sin_addr.s_addr);
 
 	    int file;
 
