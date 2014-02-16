@@ -26,7 +26,8 @@
  * Trivial File Transfer Protocol (IEN-133)
  */
 
-#define VERSION					"1.03"
+// Version now matches the semantic version numbering as recommended by github
+#define VERSION					"1.0.3"
 
 #define	SEGSIZE	512 												// Data payload size
 #define PKTSIZE 				SEGSIZE+sizeof(struct tftp_header)  // Max packet size
