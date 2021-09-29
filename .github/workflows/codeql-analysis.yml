@@ -64,7 +64,7 @@ jobs:
     #    uses a compiled language
 
     - run: |
-      make upgrade-linux
+       make upgrade-linux
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
