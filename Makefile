@@ -14,7 +14,7 @@ upgrade-win32: tftp.c
 
 upgrade-linux: tftp.c
 	mkdir -p  ./linux
-	$(CC) -m32 -o ./linux/upgrade  tftp.c
+	$(CC) -o ./linux/upgrade  tftp.c
 
 clean:
 	rm -rf ./win32
